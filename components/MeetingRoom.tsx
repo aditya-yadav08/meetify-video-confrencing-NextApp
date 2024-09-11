@@ -1,8 +1,8 @@
-import { CallControls, CallingState, CallParticipantsList, CallStatsButton, PaginatedGridLayout, SpeakerLayout } from "@stream-io/video-react-sdk";
+import { CallControls, CallingState, CallParticipantsList, CallStatsButton, PaginatedGridLayout, SpeakerLayout, useCallStateHooks } from "@stream-io/video-react-sdk";
 import React, { useState } from "react";
 import Loader from "./Loader";
 import { cn } from '@/lib/utils';
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { LayoutList, Users } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
 
@@ -10,17 +10,17 @@ type CallLayoutType = 'grid' | 'speaker-left' | 'speaker-right';
 
 const MeetingRoom = () => {
 
-  // const searchParams = useSearchParams();
-  // const isPersonalRoom = !!searchParams.get('personal');
+  const searchParams = useSearchParams();
+  const isPersonalRoom = !!searchParams.get('personal');
   const router = useRouter();
   const [layout, setLayout] = useState<CallLayoutType>('speaker-left');
   const [showParticipants, setShowParticipants] = useState(false);
-  // const { useCallCallingState } = useCallStateHooks();
+  const { useCallCallingState } = useCallStateHooks();
 
   // for more detail about types of CallingState see: https://getstream.io/video/docs/react/ui-cookbook/ringing-call/#incoming-call-panel
-  // const callingState = useCallCallingState();
+  const callingState = useCallCallingState();
 
-  // if (callingState !== CallingState.JOINED) return <Loader />;
+  if (callingState !== CallingState.JOINED) return <Loader />;
 
   const CallLayout = () => {
     switch (layout) {

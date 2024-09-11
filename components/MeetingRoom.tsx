@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { useRouter, useSearchParams } from "next/navigation";
 import { LayoutList, Users } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import EndCallButton from "./EndCallButton";
 
 type CallLayoutType = 'grid' | 'speaker-left' | 'speaker-right';
 
@@ -48,7 +49,7 @@ const MeetingRoom = () => {
         </div>
       </div>
       {/* video layout and call controls */}
-      <div className="fixed bottom-0 flex w-full items-center justify-center gap-5">
+      <div className="fixed bottom-0 flex w-full items-center justify-center gap-5 flex-wrap">
         <CallControls onLeave={() => router.push(`/`)} />
 
         <DropdownMenu>
@@ -78,7 +79,7 @@ const MeetingRoom = () => {
             <Users size={20} className="text-white" />
           </div>
         </button>
-        {/* {!isPersonalRoom && <EndCallButton />} */}
+        {!isPersonalRoom && <EndCallButton />}
       </div>
     </section>
   );

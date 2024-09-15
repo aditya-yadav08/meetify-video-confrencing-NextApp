@@ -106,5 +106,4 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
     </div>
   );
 };
-//New
 export default CallList;
